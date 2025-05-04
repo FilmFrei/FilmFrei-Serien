@@ -7138,7 +7138,7 @@ function showDetails(serie) {
 
   if (validSeasons.length === 0) {
     episodeSelect.innerHTML = '';
-    episodeFrame.src = '';
+    episodeFrame.removeAttribute("src");
     return;
   }
 
@@ -7149,7 +7149,11 @@ function showDetails(serie) {
     seasonSelect.appendChild(opt);
   });
 
-  seasonSelect.onchange = () => updateEpisodes(validSeasons);
+  seasonSelect.onchange = () => {
+    updateEpisodes(validSeasons);
+    episodeSelect.selectedIndex = 0;
+    loadEpisode(validSeasons);
+  };
   episodeSelect.onchange = () => loadEpisode(validSeasons);
 
   seasonSelect.selectedIndex = 0;
@@ -7167,7 +7171,7 @@ function updateEpisodes(seasons) {
     opt.textContent = `${ep.episode}. ${ep.title}`;
     episodeSelect.appendChild(opt);
   });
-  episodeFrame.src = '';
+  episodeFrame.removeAttribute("src");
   loader.style.display = 'none';
   popupNotice.style.display = 'none';
 }
@@ -7177,9 +7181,12 @@ function loadEpisode(seasons) {
   const episode = season.episodes[episodeSelect.value];
   if (episode && episode.voe_redirect) {
     loader.style.display = 'block';
-    episodeFrame.setAttribute("src", episode.voe_redirect);
-    episodeFrame.setAttribute("allowfullscreen", "true");
+    episodeFrame.removeAttribute("src");
     episodeFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation allow-popups allow-modals");
+    episodeFrame.setAttribute("allowfullscreen", "true");
+    setTimeout(() => {
+      episodeFrame.setAttribute("src", episode.voe_redirect);
+    }, 50);
   } else {
     episodeFrame.removeAttribute("src");
   }
