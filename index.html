@@ -7183,18 +7183,40 @@ function loadEpisode(seasons) {
     loader.style.display = 'block';
     popupNotice.style.display = 'none';
 
-    episodeFrame.removeAttribute("src");
-    episodeFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation allow-popups allow-modals");
-    episodeFrame.setAttribute("allowfullscreen", "true");
+    // Erstelle neuen iframe, um open-Override sicher zu setzen
+    const newFrame = document.createElement('iframe');
+    newFrame.id = 'episode-frame';
+    newFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation allow-popups allow-modals");
+    newFrame.setAttribute("allowfullscreen", "true");
+    newFrame.style.width = '100%';
+    newFrame.style.height = '100%';
+    newFrame.style.border = 'none';
+    newFrame.style.borderRadius = '12px';
 
-    episodeFrame.onload = () => {
+    newFrame.onload = () => {
       loader.style.display = 'none';
       try {
-        episodeFrame.contentWindow.open = function () {
+        newFrame.contentWindow.open = function () {
           popupNotice.style.display = 'block';
           console.warn('Popup-Versuch wurde geblockt!');
           return null;
         };
+      } catch (e) {
+        console.warn('Popup block nicht möglich (Cross-Origin)');
+      }
+    };
+
+    setTimeout(() => {
+      newFrame.setAttribute("src", episode.voe_redirect);
+    }, 50);
+
+    // Ersetze alten Frame
+    episodeFrame.replaceWith(newFrame);
+    window.episodeFrame = newFrame;
+  } else {
+    episodeFrame.removeAttribute("src");
+  }
+};
       } catch (e) {
         console.warn('Popup block nicht möglich (Cross-Origin)');
       }
