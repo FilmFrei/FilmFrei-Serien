@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FilmFrei-Serien</title>
+  <title>Serien-Viewer</title>
   <style>
     * {
       margin: 0;
@@ -7181,47 +7181,9 @@ function loadEpisode(seasons) {
   const episode = season.episodes[episodeSelect.value];
   if (episode && episode.voe_redirect) {
     loader.style.display = 'block';
-    popupNotice.style.display = 'none';
-
-    // Erstelle neuen iframe, um open-Override sicher zu setzen
-    const newFrame = document.createElement('iframe');
-    newFrame.id = 'episode-frame';
-    newFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation allow-popups allow-modals");
-    newFrame.setAttribute("allowfullscreen", "true");
-    newFrame.style.width = '100%';
-    newFrame.style.height = '100%';
-    newFrame.style.border = 'none';
-    newFrame.style.borderRadius = '12px';
-
-    newFrame.onload = () => {
-      loader.style.display = 'none';
-      try {
-        newFrame.contentWindow.open = function () {
-          popupNotice.style.display = 'block';
-          console.warn('Popup-Versuch wurde geblockt!');
-          return null;
-        };
-      } catch (e) {
-        console.warn('Popup block nicht möglich (Cross-Origin)');
-      }
-    };
-
-    setTimeout(() => {
-      newFrame.setAttribute("src", episode.voe_redirect);
-    }, 50);
-
-    // Ersetze alten Frame
-    episodeFrame.replaceWith(newFrame);
-    window.episodeFrame = newFrame;
-  } else {
     episodeFrame.removeAttribute("src");
-  }
-};
-      } catch (e) {
-        console.warn('Popup block nicht möglich (Cross-Origin)');
-      }
-    };
-
+    episodeFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation allow-popups allow-modals");
+    episodeFrame.setAttribute("allowfullscreen", "true");
     setTimeout(() => {
       episodeFrame.setAttribute("src", episode.voe_redirect);
     }, 50);
@@ -7229,6 +7191,18 @@ function loadEpisode(seasons) {
     episodeFrame.removeAttribute("src");
   }
 }
+
+episodeFrame.onload = () => {
+  loader.style.display = 'none';
+  try {
+    episodeFrame.contentWindow.open = function () {
+      popupNotice.style.display = 'block';
+      return null;
+    };
+  } catch (e) {
+    console.warn('Popup block nicht möglich (Cross-Origin)');
+  }
+};
 
 function closeOverlay() {
   overlay.style.display = 'none';
