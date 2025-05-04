@@ -7181,9 +7181,25 @@ function loadEpisode(seasons) {
   const episode = season.episodes[episodeSelect.value];
   if (episode && episode.voe_redirect) {
     loader.style.display = 'block';
+    popupNotice.style.display = 'none';
+
     episodeFrame.removeAttribute("src");
     episodeFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation allow-popups allow-modals");
     episodeFrame.setAttribute("allowfullscreen", "true");
+
+    episodeFrame.onload = () => {
+      loader.style.display = 'none';
+      try {
+        episodeFrame.contentWindow.open = function () {
+          popupNotice.style.display = 'block';
+          console.warn('Popup-Versuch wurde geblockt!');
+          return null;
+        };
+      } catch (e) {
+        console.warn('Popup block nicht möglich (Cross-Origin)');
+      }
+    };
+
     setTimeout(() => {
       episodeFrame.setAttribute("src", episode.voe_redirect);
     }, 50);
@@ -7191,18 +7207,6 @@ function loadEpisode(seasons) {
     episodeFrame.removeAttribute("src");
   }
 }
-
-episodeFrame.onload = () => {
-  loader.style.display = 'none';
-  try {
-    episodeFrame.contentWindow.open = function () {
-      popupNotice.style.display = 'block';
-      return null;
-    };
-  } catch (e) {
-    console.warn('Popup block nicht möglich (Cross-Origin)');
-  }
-};
 
 function closeOverlay() {
   overlay.style.display = 'none';
@@ -7247,6 +7251,5 @@ document.addEventListener('click', e => {
 
 renderSeriesList();
 </script>
-    <footer>© 2025 Filmfrei – Alle Rechte vorbehalten</footer>
 </body>
 </html>
