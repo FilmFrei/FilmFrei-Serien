@@ -7131,27 +7131,35 @@ function showDetails(serie) {
   detailDescription.textContent = serie.description;
 
   seasonSelect.innerHTML = '';
-  serie.seasons.forEach((season, i) => {
+  const validSeasons = serie.seasons.filter(season => {
+    const name = (season.season || '').toLowerCase().trim();
+    return name && name !== 'filme' && name !== 'film' && Array.isArray(season.episodes) && season.episodes.length > 0;
+  });
+
+  if (validSeasons.length === 0) {
+    episodeSelect.innerHTML = '';
+    episodeFrame.src = '';
+    return;
+  }
+
+  validSeasons.forEach((season, i) => {
     const opt = document.createElement('option');
     opt.value = i;
     opt.textContent = `Staffel ${season.season}`;
     seasonSelect.appendChild(opt);
   });
 
-  seasonSelect.onchange = () => updateEpisodes(serie);
-  episodeSelect.onchange = () => loadEpisode(serie);
+  seasonSelect.onchange = () => updateEpisodes(validSeasons);
+  episodeSelect.onchange = () => loadEpisode(validSeasons);
 
-  updateEpisodes(serie);
-  // Sofort Staffel 1, Folge 1 laden
-  if (serie.seasons.length > 0 && serie.seasons[0].episodes.length > 0) {
-    seasonSelect.selectedIndex = 0;
-    episodeSelect.selectedIndex = 0;
-    loadEpisode(serie);
-  }
+  seasonSelect.selectedIndex = 0;
+  updateEpisodes(validSeasons);
+  episodeSelect.selectedIndex = 0;
+  loadEpisode(validSeasons);
 }
 
-function updateEpisodes(serie) {
-  const season = serie.seasons[seasonSelect.value];
+function updateEpisodes(seasons) {
+  const season = seasons[seasonSelect.value];
   episodeSelect.innerHTML = '';
   season.episodes.forEach((ep, i) => {
     const opt = document.createElement('option');
@@ -7164,14 +7172,16 @@ function updateEpisodes(serie) {
   popupNotice.style.display = 'none';
 }
 
-function loadEpisode(serie) {
-  const season = serie.seasons[seasonSelect.value];
+function loadEpisode(seasons) {
+  const season = seasons[seasonSelect.value];
   const episode = season.episodes[episodeSelect.value];
   if (episode && episode.voe_redirect) {
     loader.style.display = 'block';
-    episodeFrame.src = episode.voe_redirect;
+    episodeFrame.setAttribute("src", episode.voe_redirect);
+    episodeFrame.setAttribute("allowfullscreen", "true");
+    episodeFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation allow-popups allow-modals");
   } else {
-    episodeFrame.src = '';
+    episodeFrame.removeAttribute("src");
   }
 }
 
@@ -7189,7 +7199,7 @@ episodeFrame.onload = () => {
 
 function closeOverlay() {
   overlay.style.display = 'none';
-  episodeFrame.src = '';
+  episodeFrame.removeAttribute("src");
   loader.style.display = 'none';
   popupNotice.style.display = 'none';
 }
