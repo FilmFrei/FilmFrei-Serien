@@ -613,9 +613,284 @@ footer {
 
   <footer>© 2025 Filmfrei – Alle Rechte vorbehalten</footer>
 <script>
-</sript
+const seriesData = [
+  // Hier Ihre Serien-Daten aus dem ursprünglichen Code einfügen
+  {
+    "title": "Squid Game",
+    "description": "Ein mysteriöses Überlebens-Spiel verspricht einen Gewinn von 45.6 Milliarden Won. Die kann Seong Gi-Hun (Lee Jung-jae) gut gebrauchen, denn sein Leben ist eine einzige Talfahrt. Er lebt bei seiner Mutter, leidet an Spielsucht und hat kaum Geld, um seine Tochter finanziell zu versorgen. Das könnte sich alles ändern, als er auf einen rätselhaften Fremden trifft.",
+    "cover": "https://s.to/public/img/cover/squid-game-stream-cover-zlmoWSBwlNiImpMsC1NBrARp7iXWlR0H_220x330.jpg",
+    "seasons": [
+      // Staffeln und Episoden hier beibehalten
+    ]
+  }
+  // Weitere Serien hier einfügen
+];
 
+// DOM-Elemente
+const latestSeriesContainer = document.getElementById('latest-series');
+const seriesListContainer = document.getElementById('series-list');
+const searchInput = document.querySelector('.search-input');
+const searchResults = document.querySelector('.search-results');
+const filmDetailOverlay = document.querySelector('.film-detail-overlay');
+const filmDetailClose = document.querySelector('.film-detail-close');
+const cookieBanner = document.querySelector('.cookie-banner');
+const cookieAccept = document.querySelector('.cookie-accept');
 
-=>
+// Sortiere nach Neuheit (nimm an, dass die neuesten zuerst in seriesData stehen)
+const sortedByDate = [...seriesData];
+
+// Neueste Serien anzeigen
+sortedByDate.slice(0, 4).forEach(series => {
+  latestSeriesContainer.appendChild(createSeriesCard(series));
+});
+
+// Alle Serien anzeigen
+sortedByDate.forEach(series => {
+  seriesListContainer.appendChild(createSeriesCard(series));
+});
+
+// Eine Serien-Karte erstellen
+function createSeriesCard(series) {
+  const card = document.createElement('div');
+  card.classList.add('film-card');
+  card.innerHTML = `
+    <img src="${series.cover}" alt="${series.title}">
+    <div class="film-info">
+      <div class="film-title">${series.title}</div>
+      <div class="film-year">Serie</div>
+    </div>
+  `;
+  card.addEventListener('click', () => openSeriesDetail(series));
+  return card;
+}
+
+// Suchfunktion
+searchInput.addEventListener('input', (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  if (searchTerm.length < 2) {
+    searchResults.classList.remove('active');
+    return;
+  }
+
+  const matchedSeries = seriesData.filter(series =>
+    series.title.toLowerCase().includes(searchTerm) ||
+    series.description.toLowerCase().includes(searchTerm)
+  );
+
+  searchResults.innerHTML = '';
+
+  if (matchedSeries.length > 0) {
+    matchedSeries.forEach(series => {
+      const resultItem = document.createElement('div');
+      resultItem.classList.add('search-result-item');
+      resultItem.textContent = series.title;
+      resultItem.addEventListener('click', () => {
+        openSeriesDetail(series);
+        searchResults.classList.remove('active');
+        searchInput.value = '';
+      });
+      searchResults.appendChild(resultItem);
+    });
+    searchResults.classList.add('active');
+  } else {
+    searchResults.classList.remove('active');
+  }
+});
+
+// Klick außerhalb der Suche schließt die Suchergebnisse
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-container')) {
+    searchResults.classList.remove('active');
+  }
+});
+
+// Serien-Details öffnen
+function openSeriesDetail(series) {
+  const coverImg = filmDetailOverlay.querySelector('.film-detail-cover');
+  const title = filmDetailOverlay.querySelector('.film-detail-title');
+  const description = filmDetailOverlay.querySelector('.film-detail-description');
+  const player = filmDetailOverlay.querySelector('.film-detail-player');
+  const seasonSelect = document.getElementById('season-select');
+  const episodeSelect = document.getElementById('episode-select');
+
+  coverImg.src = series.cover;
+  coverImg.alt = series.title;
+  title.textContent = series.title;
+  description.textContent = series.description;
+
+  // Staffel-Auswahl leeren und neu befüllen
+  seasonSelect.innerHTML = '';
+  
+  // Nur gültige Staffeln filtern
+  const validSeasons = series.seasons.filter(season => {
+    const seasonName = (season.season || '').toLowerCase().trim();
+    return seasonName && seasonName !== 'filme' && seasonName !== 'film' && 
+           Array.isArray(season.episodes) && season.episodes.length > 0;
+  });
+
+  // Wenn keine Staffeln verfügbar sind, Overlay anzeigen ohne Player
+  if (validSeasons.length === 0) {
+    player.innerHTML = '';
+    filmDetailOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    return;
+  }
+
+  // Staffeln zur Auswahl hinzufügen
+  validSeasons.forEach((season, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `Staffel ${season.season}`;
+    seasonSelect.appendChild(opt);
+  });
+
+  // Event-Listener für Staffel-Änderung
+  seasonSelect.onchange = () => {
+    updateEpisodes(validSeasons);
+    episodeSelect.selectedIndex = 0;
+    loadEpisode(validSeasons);
+  };
+
+  // Event-Listener für Episoden-Änderung
+  episodeSelect.onchange = () => loadEpisode(validSeasons);
+
+  // Standard: Erste Staffel auswählen
+  seasonSelect.selectedIndex = 0;
+  updateEpisodes(validSeasons);
+  episodeSelect.selectedIndex = 0;
+  
+  // Serie laden und Overlay anzeigen
+  filmDetailOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Episode laden
+  loadEpisode(validSeasons);
+}
+
+// Episoden der ausgewählten Staffel anzeigen
+function updateEpisodes(seasons) {
+  const seasonSelect = document.getElementById('season-select');
+  const episodeSelect = document.getElementById('episode-select');
+  const season = seasons[seasonSelect.value];
+  
+  episodeSelect.innerHTML = '';
+  season.episodes.forEach((ep, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${ep.episode}. ${ep.title}`;
+    episodeSelect.appendChild(opt);
+  });
+}
+
+// Episode laden
+function loadEpisode(seasons) {
+  const seasonSelect = document.getElementById('season-select');
+  const episodeSelect = document.getElementById('episode-select');
+  const player = filmDetailOverlay.querySelector('.film-detail-player');
+  const loader = document.getElementById('loader');
+  const popupNotice = document.getElementById('popupNotice');
+
+  const season = seasons[seasonSelect.value];
+  const episode = season.episodes[episodeSelect.value];
+
+  // Prüfen, ob die Episode einen gültigen Link hat
+  if (episode && episode.voe_redirect) {
+    loader.style.display = 'block';
+    popupNotice.style.display = 'none';
+    player.innerHTML = '';
+    
+    // Verzögerung einbauen, um Lader anzuzeigen
+    setTimeout(() => {
+      player.innerHTML = `
+        <iframe id="videoFrame" src="${episode.voe_redirect}" 
+            title="Serienspieler für ${season.season}, Episode ${episode.episode}"
+            sandbox="allow-scripts allow-same-origin allow-presentation" 
+            allowfullscreen 
+            style="width: 100%; height: 100%; border: none; border-radius: 12px;">
+        </iframe>
+      `;
+
+      const iframe = document.getElementById('videoFrame');
+      
+      // WICHTIG: Popup-Blocker-Funktion genau wie auf der Hauptseite
+      iframe.onload = () => {
+        loader.style.display = 'none';
+        try {
+          iframe.contentWindow.open = function() {
+            popupNotice.style.display = 'block';
+            console.warn('Popup-Versuch wurde geblockt!');
+            return null;
+          };
+        } catch (e) {
+          console.warn('Cross-Origin-Schutz: window.open konnte nicht überschrieben werden.');
+        }
+      };
+    }, 500);
+  } else {
+    player.innerHTML = '<div style="padding: 20px; text-align: center;">Für diese Episode ist noch kein Stream verfügbar.</div>';
+    loader.style.display = 'none';
+  }
+}
+
+// Overlay schließen
+filmDetailClose.addEventListener('click', closeSeriesDetail);
+filmDetailOverlay.addEventListener('click', (e) => {
+  if (e.target === filmDetailOverlay) {
+    closeSeriesDetail();
+  }
+});
+
+function closeSeriesDetail() {
+  filmDetailOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+  const player = filmDetailOverlay.querySelector('.film-detail-player');
+  player.innerHTML = '';
+}
+
+// Swipe zum Schließen auf Mobilgeräten
+let touchStartY = 0;
+let touchEndY = 0;
+
+filmDetailOverlay.addEventListener('touchstart', (e) => {
+  touchStartY = e.changedTouches[0].screenY;
+}, false);
+
+filmDetailOverlay.addEventListener('touchend', (e) => {
+  touchEndY = e.changedTouches[0].screenY;
+  handleSwipe();
+}, false);
+
+function handleSwipe() {
+  const swipeDistance = touchEndY - touchStartY;
+  if (swipeDistance > 100) {
+    closeSeriesDetail();
+  }
+}
+
+// Cookie-Banner
+if (!localStorage.getItem('cookiesAccepted')) {
+  cookieBanner.style.display = 'block';
+}
+
+cookieAccept.addEventListener('click', () => {
+  localStorage.setItem('cookiesAccepted', 'true');
+  cookieBanner.style.display = 'none';
+});
+
+// Hintergrund-Animation mit Farbverlauf (wie auf der Hauptseite)
+const mainElement = document.querySelector('main');
+let gradientPosition = 0;
+
+function animateGradient() {
+  gradientPosition = (gradientPosition + 0.2) % 360;
+  const gradient = 
+    `radial-gradient(circle at ${50 + Math.sin(gradientPosition * Math.PI / 180) * 10}% ${50 + Math.cos(gradientPosition * Math.PI / 180) * 10}%, rgba(10, 132, 255, 0.03), transparent 60%)`;
+  mainElement.style.backgroundImage = gradient;
+  requestAnimationFrame(animateGradient);
+}
+
+// Animation starten
+animateGradient();
+</script>
 </body>
 </html>=
