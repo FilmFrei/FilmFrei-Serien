@@ -559,81 +559,6 @@ footer {
     border-radius: 15px 15px 0 0
   }
 }
-</style>
-</head>
-<body>
-  
-<div class="nav-buttons">
-  <a href="https://filmfrei.github.io/FilmFrei" class="nav-button">FilmFrei</a>
-  <a href="https://filmfrei.github.io/FilmFrei-Serien" class="nav-button">FilmFrei-Serien</a>
-  <a href="mailto:mundart_wiedergabe_1t@icloud.com?subject=FilmFrei%20Filmwunsch&body=Hallo%20FilmFrei-Team%2C%0A%0AIch%20hätte%20gerne%20folgenden%20Film%20auf%20eurer%20Seite%3A%0A%0AFilmname%3A%20%0AJahr%3A%20%0AKurze%20Beschreibung%3A%20%0A%0AVielen%20Dank%21" class="nav-button">Filmwunsch</a>
-  <a href="mailto:mundart_wiedergabe_1t@icloud.com?subject=FilmFrei%20Serienwunsch&body=Hallo%20FilmFrei-Team%2C%0A%0AIch%20hätte%20gerne%20folgende%20Serie%20auf%20eurer%20Seite%3A%0A%0ASeriename%3A%20%0AStaffel(n)%3A%20%0AKurze%20Beschreibung%3A%20%0A%0AVielen%20Dank%21" class="nav-button">Serienwunsch</a>
-</div>
-  
-  <!-- DNS-Warnung/Meldung einfügen (gleiche wie auf der Hauptseite) -->
-  <div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
-    <center>
-      <strong>Liebe FilmFrei-User,</strong><br>
-      Einige Anbieter blockieren uns. Wenn Sie betroffen sind, lesen Sie unseren 
-      <a href="https://filmfrei.github.io/FilmFrei-DNS" style="color: #3498db; text-decoration: underline; font-weight: bold;">Artikel</a> 
-      zur Lösung des Problems.<br>
-      <strong>Danke für euer Vertrauen – euer FilmFrei-Team</strong>
-    </center>
-  </div>
-
-  <header>
-    <!-- Hier nur den Markennamen verwenden, kein Logo -->
-    <div class="logo-container">
-      <div class="brand-name">FilmFrei</div>
-    </div>
-
-    <!-- Suchleiste (gleiche wie auf der Hauptseite) -->
-    <div class="search-container">
-      <input class="search-input" id="search" placeholder="Serie suchen...">
-      <div class="search-icon">
-        <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
-        </svg>
-      </div>
-      <div class="search-results" id="search-results"></div>
-    </div>
-  </header>
-
-  <main>
-    <section>
-      <h2 class="section-title">Neueste Serien</h2>
-      <div class="film-grid" id="latest-series"></div>
-    </section>
-    <section>
-      <h2 class="section-title">Alle Serien</h2>
-      <div class="film-grid" id="series-list"></div>
-    </section>
-  </main>
-
-  <!-- Detail-Overlay für Serien (angepasst vom Film-Overlay) -->
-  <div class="film-detail-overlay">
-    <div class="film-detail-close"></div>
-    <div class="film-detail-container">
-      <div class="film-detail-left">
-        <img alt="" class="film-detail-cover" src="">
-        <div class="film-detail-info">
-          <h3 class="film-detail-title"></h3>
-          <div class="film-detail-meta">
-            <select id="season-select" class="season-select"></select>
-            <select id="episode-select" class="episode-select"></select>
-          </div>
-          <p class="film-detail-description"></p>
-        </div>
-      </div>
-      <div class="film-detail-right">
-        <div class="loader" id="loader"></div>
-        <div id="popupNotice">🚫 Popup-Versuch wurde blockiert!</div>
-        <div class="film-detail-player"></div>
-      </div>
-    </div>
-  </div>
 
   <!-- Cookie-Banner (gleiche wie Hauptseite) -->
   <div class="cookie-banner">
@@ -22048,3 +21973,564 @@ const seriesData = [
                 {
                     "episode": "4",
                     "title": "Späte Reue",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-5/episode-4",
+                    "voe_redirect": "https://s.to/redirect/8984690"
+                },
+                {
+                    "episode": "5",
+                    "title": "Der letzte Besuch",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-5/episode-5",
+                    "voe_redirect": "https://s.to/redirect/9586795"
+                },
+                {
+                    "episode": "6",
+                    "title": "Eiskalter Mord",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-5/episode-6",
+                    "voe_redirect": "https://s.to/redirect/9586797"
+                },
+                {
+                    "episode": "7",
+                    "title": "Der Silberschatz",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-5/episode-7",
+                    "voe_redirect": "https://s.to/redirect/9586798"
+                },
+                {
+                    "episode": "8",
+                    "title": "Von Liebe und Tod",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-5/episode-8",
+                    "voe_redirect": "https://s.to/redirect/9579131"
+                }
+            ]
+        },
+        {
+            "season": "6",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Erschütterungen",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-1",
+                    "voe_redirect": "https://s.to/redirect/13289404"
+                },
+                {
+                    "episode": "2",
+                    "title": "Über den Klippen",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-2",
+                    "voe_redirect": "https://s.to/redirect/12541844"
+                },
+                {
+                    "episode": "3",
+                    "title": "Die einsame Insel",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-3",
+                    "voe_redirect": "https://s.to/redirect/12541774"
+                },
+                {
+                    "episode": "4",
+                    "title": "Cricket im Blut",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-4",
+                    "voe_redirect": "https://s.to/redirect/12610937"
+                },
+                {
+                    "episode": "5",
+                    "title": "Tod an Bord (1)",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-5",
+                    "voe_redirect": "https://s.to/redirect/12541795"
+                },
+                {
+                    "episode": "6",
+                    "title": "Tod an Bord (2)",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-6",
+                    "voe_redirect": "https://s.to/redirect/12541797"
+                },
+                {
+                    "episode": "7",
+                    "title": "Sankta Ursula",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-7",
+                    "voe_redirect": "https://s.to/redirect/12541808"
+                },
+                {
+                    "episode": "8",
+                    "title": "Späte Rache",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-6/episode-8",
+                    "voe_redirect": "https://s.to/redirect/12541806"
+                }
+            ]
+        },
+        {
+            "season": "7",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Die tote Braut",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-1",
+                    "voe_redirect": "https://s.to/redirect/13741308"
+                },
+                {
+                    "episode": "2",
+                    "title": "Das letzte Spiel",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-2",
+                    "voe_redirect": "https://s.to/redirect/12541850"
+                },
+                {
+                    "episode": "3",
+                    "title": "Die Kunst des Schreibens",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-3",
+                    "voe_redirect": "https://s.to/redirect/12541861"
+                },
+                {
+                    "episode": "4",
+                    "title": "Der Wunderheiler",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-4",
+                    "voe_redirect": "https://s.to/redirect/12541871"
+                },
+                {
+                    "episode": "5",
+                    "title": "Geldgier",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-5",
+                    "voe_redirect": "https://s.to/redirect/12541876"
+                },
+                {
+                    "episode": "6",
+                    "title": "Tod im Refugium",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-6",
+                    "voe_redirect": "https://s.to/redirect/12541883"
+                },
+                {
+                    "episode": "7",
+                    "title": "Habgier",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-7",
+                    "voe_redirect": "https://s.to/redirect/12541890"
+                },
+                {
+                    "episode": "8",
+                    "title": "Mord aus der Vergangenheit",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-7/episode-8",
+                    "voe_redirect": "https://s.to/redirect/12541831"
+                }
+            ]
+        },
+        {
+            "season": "8",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Der Tote im Bus",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-1",
+                    "voe_redirect": "https://s.to/redirect/12541949"
+                },
+                {
+                    "episode": "2",
+                    "title": "Tierische Rache",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-2",
+                    "voe_redirect": "https://s.to/redirect/12541948"
+                },
+                {
+                    "episode": "3",
+                    "title": "Hot Spots",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-3",
+                    "voe_redirect": "https://s.to/redirect/12541953"
+                },
+                {
+                    "episode": "4",
+                    "title": "Bittere Bohnen",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-4",
+                    "voe_redirect": "https://s.to/redirect/12541964"
+                },
+                {
+                    "episode": "5",
+                    "title": "Geheimnisvolle Tiefen Teil 1",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-5",
+                    "voe_redirect": "https://s.to/redirect/12920554"
+                },
+                {
+                    "episode": "6",
+                    "title": "Geheimnisvolle Tiefen Teil 2",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-6",
+                    "voe_redirect": "https://s.to/redirect/12541984"
+                },
+                {
+                    "episode": "7",
+                    "title": "Sonne, Strand und Mord",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-7",
+                    "voe_redirect": "https://s.to/redirect/12541987"
+                },
+                {
+                    "episode": "8",
+                    "title": "Der letzte Trumpf",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-8/episode-8",
+                    "voe_redirect": "https://s.to/redirect/12541991"
+                }
+            ]
+        },
+        {
+            "season": "9",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Doppelmord",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-1",
+                    "voe_redirect": "https://s.to/redirect/8984763"
+                },
+                {
+                    "episode": "2",
+                    "title": "Tod einer Künstlerin",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-2",
+                    "voe_redirect": "https://s.to/redirect/13992835"
+                },
+                {
+                    "episode": "3",
+                    "title": "Gegen die Uhr",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-3",
+                    "voe_redirect": "https://s.to/redirect/10006887"
+                },
+                {
+                    "episode": "4",
+                    "title": "Trügerischer Schein",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-4",
+                    "voe_redirect": "https://s.to/redirect/12617560"
+                },
+                {
+                    "episode": "5",
+                    "title": "Die tödliche halbe Stunde",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-5",
+                    "voe_redirect": "https://s.to/redirect/8984795"
+                },
+                {
+                    "episode": "6",
+                    "title": "Mosquito Island",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-6",
+                    "voe_redirect": "https://s.to/redirect/17546801"
+                },
+                {
+                    "episode": "7",
+                    "title": "Familienangelegenheiten",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-7",
+                    "voe_redirect": "https://s.to/redirect/12617495"
+                },
+                {
+                    "episode": "8",
+                    "title": "Schuss ins Herz",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-9/episode-8",
+                    "voe_redirect": "https://s.to/redirect/7402227"
+                }
+            ]
+        },
+        {
+            "season": "10",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Der Doppelgänger",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-1",
+                    "voe_redirect": "https://s.to/redirect/10694148"
+                },
+                {
+                    "episode": "2",
+                    "title": "Tod des Professors",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-2",
+                    "voe_redirect": "https://s.to/redirect/10694147"
+                },
+                {
+                    "episode": "3",
+                    "title": "In Luft aufgelöst",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-3",
+                    "voe_redirect": "https://s.to/redirect/10694277"
+                },
+                {
+                    "episode": "4",
+                    "title": "Tödliche Nachtschicht",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-4",
+                    "voe_redirect": "https://s.to/redirect/13289412"
+                },
+                {
+                    "episode": "5",
+                    "title": "Die Gabe des Teufels (1)",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-5",
+                    "voe_redirect": "https://s.to/redirect/10694229"
+                },
+                {
+                    "episode": "6",
+                    "title": "Die Gabe des Teufels (2)",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-6",
+                    "voe_redirect": "https://s.to/redirect/10694196"
+                },
+                {
+                    "episode": "7",
+                    "title": "Mitten ins Herz",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-7",
+                    "voe_redirect": "https://s.to/redirect/10694217"
+                },
+                {
+                    "episode": "8",
+                    "title": "Vergessen",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-10/episode-8",
+                    "voe_redirect": "https://s.to/redirect/10694179"
+                }
+            ]
+        },
+        {
+            "season": "11",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Die Entführung",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-1",
+                    "voe_redirect": "https://s.to/redirect/11403420"
+                },
+                {
+                    "episode": "2",
+                    "title": "Rückschwung",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-2",
+                    "voe_redirect": "https://s.to/redirect/13289413"
+                },
+                {
+                    "episode": "3",
+                    "title": "Freier Fall",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-3",
+                    "voe_redirect": "https://s.to/redirect/11403808"
+                },
+                {
+                    "episode": "4",
+                    "title": "Undercover",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-4",
+                    "voe_redirect": "https://s.to/redirect/11403812"
+                },
+                {
+                    "episode": "5",
+                    "title": "Flüchtiger Ruhm",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-5",
+                    "voe_redirect": "https://s.to/redirect/11403817"
+                },
+                {
+                    "episode": "6",
+                    "title": "Verwaschene Spuren",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-6",
+                    "voe_redirect": "https://s.to/redirect/11403821"
+                },
+                {
+                    "episode": "7",
+                    "title": "Licht im Dunkeln",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-7",
+                    "voe_redirect": "https://s.to/redirect/11403797"
+                },
+                {
+                    "episode": "8",
+                    "title": "Spiel der Könige",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-11/episode-8",
+                    "voe_redirect": "https://s.to/redirect/11403799"
+                }
+            ]
+        },
+        {
+            "season": "12",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Die Finsternis",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-1",
+                    "voe_redirect": "https://s.to/redirect/13183580"
+                },
+                {
+                    "episode": "2",
+                    "title": "Der Bunker",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-2",
+                    "voe_redirect": "https://s.to/redirect/13183578"
+                },
+                {
+                    "episode": "3",
+                    "title": "Mord an Deck",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-3",
+                    "voe_redirect": "https://s.to/redirect/13183582"
+                },
+                {
+                    "episode": "4",
+                    "title": "Feuer im Herzen",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-4",
+                    "voe_redirect": "https://s.to/redirect/13289415"
+                },
+                {
+                    "episode": "5",
+                    "title": "Der Rückkehrer",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-5",
+                    "voe_redirect": "https://s.to/redirect/13183593"
+                },
+                {
+                    "episode": "6",
+                    "title": "Das Spiel",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-6",
+                    "voe_redirect": "https://s.to/redirect/13183597"
+                },
+                {
+                    "episode": "7",
+                    "title": "Enttarnt",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-7",
+                    "voe_redirect": "https://s.to/redirect/13183600"
+                },
+                {
+                    "episode": "8",
+                    "title": "Musik im Blut",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-12/episode-8",
+                    "voe_redirect": "https://s.to/redirect/13183607"
+                }
+            ]
+        },
+        {
+            "season": "13",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "Weihnachtsspecial 2023 - Die letzte Botschaft (Teil 1)",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-1",
+                    "voe_redirect": "https://s.to/redirect/17443155"
+                },
+                {
+                    "episode": "2",
+                    "title": "Weihnachtsspecial 2023 - Die letzte Botschaft (Teil 2)",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-2",
+                    "voe_redirect": "https://s.to/redirect/17443180"
+                },
+                {
+                    "episode": "3",
+                    "title": "Die Erpressung",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-3",
+                    "voe_redirect": "https://s.to/redirect/17443181"
+                },
+                {
+                    "episode": "4",
+                    "title": "Die Stricknadel",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-4",
+                    "voe_redirect": "https://s.to/redirect/17443185"
+                },
+                {
+                    "episode": "5",
+                    "title": "Der Wettbewerb",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-5",
+                    "voe_redirect": "https://s.to/redirect/17443190"
+                },
+                {
+                    "episode": "6",
+                    "title": "Wechselstrom",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-6",
+                    "voe_redirect": "https://s.to/redirect/17443193"
+                },
+                {
+                    "episode": "7",
+                    "title": "Tödlicher Cocktail",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-7",
+                    "voe_redirect": "https://s.to/redirect/17443195"
+                },
+                {
+                    "episode": "8",
+                    "title": "Tod im Fahrstuhl",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-8",
+                    "voe_redirect": "https://s.to/redirect/17546802"
+                },
+                {
+                    "episode": "9",
+                    "title": "Saint Auguste",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-9",
+                    "voe_redirect": "https://s.to/redirect/17443202"
+                },
+                {
+                    "episode": "10",
+                    "title": "In Luft aufgelöst",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-13/episode-10",
+                    "voe_redirect": "https://s.to/redirect/17443203"
+                }
+            ]
+        },
+        {
+            "season": "14",
+            "episodes": [
+                {
+                    "episode": "1",
+                    "title": "",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-14/episode-1",
+                    "voe_redirect": "https://s.to/redirect/16542787"
+                },
+                {
+                    "episode": "2",
+                    "title": "",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-14/episode-2",
+                    "voe_redirect": "https://s.to/redirect/16792898"
+                },
+                {
+                    "episode": "3",
+                    "title": "",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-14/episode-3",
+                    "voe_redirect": "https://s.to/redirect/16740623"
+                },
+                {
+                    "episode": "4",
+                    "title": "",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-14/episode-4",
+                    "voe_redirect": "https://s.to/redirect/16861416"
+                },
+                {
+                    "episode": "5",
+                    "title": "",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-14/episode-5",
+                    "voe_redirect": "https://s.to/redirect/16958828"
+                },
+                {
+                    "episode": "6",
+                    "title": "",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-14/episode-6",
+                    "voe_redirect": "https://s.to/redirect/17058398"
+                },
+                {
+                    "episode": "7",
+                    "title": "",
+                    "url": "https://s.to/serie/stream/death-in-paradise/staffel-14/episode-7",
+                    "voe_redirect": "https://s.to/redirect/17147156"
+                }
+            ]
+        }
+    ]
+}
+// Laden der Serien in die UI
+    const latestSeriesContainer = document.getElementById('latest-series');
+    const seriesListContainer = document.getElementById('series-list');
+    
+    // Neueste Serien anzeigen (die ersten 4)
+    seriesData.slice(0, 4).forEach(series => {
+      latestSeriesContainer.appendChild(createSeriesCard(series));
+    });
+    
+    // Alle Serien anzeigen
+    seriesData.forEach(series => {
+      seriesListContainer.appendChild(createSeriesCard(series));
+    });
+    
+    // Funktion zum Erstellen einer Serien-Karte
+    function createSeriesCard(series) {
+      const card = document.createElement('div');
+      card.className = 'film-card';
+      card.innerHTML = `
+        <img src="${series.cover}" alt="${series.title}">
+        <div class="film-info">
+          <div class="film-title">${series.title}</div>
+          <div class="film-year">Serie</div>
+        </div>
+      `;
+      card.addEventListener('click', () => openSeriesDetail(series));
+      return card;
+    }
+    
+    // Weitere Funktionen für Suche, Serien-Details, etc.
+    
+    // Hintergrund-Animation
+    const mainElement = document.querySelector('main');
+    let gradientPosition = 0;
+
+    function animateGradient() {
+      gradientPosition = (gradientPosition + 0.2) % 360;
+      const gradient = 
+        `radial-gradient(circle at ${50 + Math.sin(gradientPosition * Math.PI / 180) * 10}% ${50 + Math.cos(gradientPosition * Math.PI / 180) * 10}%, rgba(10, 132, 255, 0.03), transparent 60%)`;
+      mainElement.style.backgroundImage = gradient;
+      requestAnimationFrame(animateGradient);
+    }
+
+    animateGradient();
+  </script>
+</body>
+</html>
